@@ -1,1 +1,5 @@
+.idea/*
+*.iml
+gen/*
+Thumbs.db
 values-v1

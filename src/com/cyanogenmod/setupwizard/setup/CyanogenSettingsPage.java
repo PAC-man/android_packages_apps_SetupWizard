@@ -59,8 +59,6 @@ public class CyanogenSettingsPage extends SetupPage {
     public static final String KEY_APPLY_DEFAULT_THEME = "apply_default_theme";
     public static final String KEY_BUTTON_BACKLIGHT = "pre_navbar_button_backlight";
 
-    public static final String PRIVACY_POLICY_URI = "https://cyngn.com/oobe-legal?hideHeader=1";
-
     public CyanogenSettingsPage(Context context, SetupDataCallbacks callbacks) {
         super(context, callbacks);
     }
@@ -85,7 +83,7 @@ public class CyanogenSettingsPage extends SetupPage {
 
     @Override
     public int getTitleResId() {
-        return R.string.setup_services;
+        return R.string.setup_services_pac;
     }
 
     private static void writeDisableNavkeysOption(Context context, boolean enabled) {
@@ -173,9 +171,6 @@ public class CyanogenSettingsPage extends SetupPage {
 
     public static class CyanogenSettingsFragment extends SetupPageFragment {
 
-        private View mKillSwitchView;
-        private TextView mKillSwitchTitle;
-        private ImageView mKillSwitchStatus;
         private View mMetricsRow;
         private View mDefaultThemeRow;
         private View mNavKeysRow;
@@ -216,52 +211,15 @@ public class CyanogenSettingsPage extends SetupPage {
 
         @Override
         protected void initializePage() {
-            String privacy_policy = getString(R.string.services_privacy_policy);
-            String policySummary = getString(R.string.services_explanation, privacy_policy);
-            SpannableString ss = new SpannableString(policySummary);
-            ClickableSpan clickableSpan = new ClickableSpan() {
-                @Override
-                public void onClick(View textView) {
-                    final Intent intent = new Intent(SetupWizardApp.ACTION_VIEW_LEGAL);
-                    intent.setData(Uri.parse(PRIVACY_POLICY_URI));
-                    try {
-                        getActivity().startActivity(intent);
-                    } catch (Exception e) {
-                        Log.e(TAG, "Unable to start activity " + intent.toString(), e);
-                    }
-                }
-            };
-            ss.setSpan(clickableSpan,
-                    policySummary.length() - privacy_policy.length() - 1,
-                    policySummary.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            TextView privacyPolicy = (TextView) mRootView.findViewById(R.id.privacy_policy);
-            privacyPolicy.setMovementMethod(LinkMovementMethod.getInstance());
-            privacyPolicy.setText(ss);
-
-            mKillSwitchView = mRootView.findViewById(R.id.killswitch);
-            mKillSwitchTitle = (TextView)mRootView.findViewById(R.id.killswitch_title);
-            mKillSwitchStatus = (ImageView)mRootView.findViewById(R.id.killswitch_check);
-            if (hideKillSwitch()) {
-                mKillSwitchView.setVisibility(View.GONE);
-            } else {
-                if (SetupWizardUtils.isDeviceLocked()) {
-                    mKillSwitchTitle.setEnabled(true);
-                    mKillSwitchStatus.setImageResource(R.drawable.tick);
-                } else {
-                    mKillSwitchTitle.setEnabled(false);
-                    mKillSwitchStatus.setImageResource(R.drawable.cross);
-                }
-            }
-
             mMetricsRow = mRootView.findViewById(R.id.metrics);
             mMetricsRow.setOnClickListener(mMetricsClickListener);
-            String metricsHelpImproveCM =
-                    getString(R.string.services_help_improve_cm, getString(R.string.os_name));
-            String metricsSummary = getString(R.string.services_metrics_label,
-                    metricsHelpImproveCM, getString(R.string.os_name));
+            String metricsHelpImprovePAC =
+                    getString(R.string.services_help_improve_pac, getString(R.string.os_name_pac));
+            String metricsSummary = getString(R.string.services_metrics_label_pac,
+                    metricsHelpImprovePAC, getString(R.string.os_name_pac));
             final SpannableStringBuilder metricsSpan = new SpannableStringBuilder(metricsSummary);
             metricsSpan.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD),
-                    0, metricsHelpImproveCM.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    0, metricsHelpImprovePAC.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             TextView metrics = (TextView) mRootView.findViewById(R.id.enable_metrics_summary);
             metrics.setText(metricsSpan);
             mMetrics = (CheckBox) mRootView.findViewById(R.id.enable_metrics_checkbox);
@@ -353,10 +311,6 @@ public class CyanogenSettingsPage extends SetupPage {
                 mNavKeys.setChecked(checked);
                 myPageBundle.putBoolean(DISABLE_NAV_KEYS, checked);
             }
-        }
-
-        private static boolean hideKillSwitch() {
-            return !SetupWizardUtils.hasKillSwitch();
         }
 
     }
