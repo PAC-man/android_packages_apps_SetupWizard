@@ -28,7 +28,7 @@
         android:id="@+id/brand_logo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_pac_logo" />
+        android:src="@drawable/pac_logo_animation" />
 
 
     <TextView android:id="@+id/mod_welcome"

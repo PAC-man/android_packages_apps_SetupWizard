@@ -27,6 +27,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.drawable.Animatable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -36,6 +38,7 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.Toast;
 
@@ -47,6 +50,7 @@ import com.cyanogenmod.setupwizard.ui.LocalePicker;
 import com.cyanogenmod.setupwizard.ui.SetupPageFragment;
 import com.cyanogenmod.setupwizard.util.SetupWizardUtils;
 
+import java.lang.ClassCastException;
 import java.util.List;
 import java.util.Locale;
 
@@ -198,15 +202,47 @@ public class WelcomePage extends SetupPage {
             }
         };
 
+        private View.OnClickListener mAnimatableClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try{
+                    animateLogo((ImageView)view);
+                } catch ( ClassCastException e){
+                    // do nothing and just log the class
+                    Log.e(TAG, "animation failed");
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        private void animateLogo(ImageView iv){
+            if (iv != null) {
+                Drawable dbl = iv.getDrawable();
+                if (dbl instanceof Animatable) {
+                    ((Animatable) dbl).start();
+                }
+            }
+        }
+
+        private Runnable sendData = new Runnable() {
+            public void run(){
+                try {
+                    final ImageView brandLogo = (ImageView) mRootView.findViewById(R.id.brand_logo);
+                    brandLogo.setOnClickListener(mAnimatableClickListener);
+                    animateLogo(brandLogo);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
         @Override
         protected void initializePage() {
             mLanguagePicker = (LocalePicker) mRootView.findViewById(R.id.locale_list);
             loadLanguages();
-            final boolean brandedDevice = getResources().getBoolean(
-                    R.bool.branded_device);
-            if (brandedDevice) {
-                mRootView.findViewById(R.id.powered_by_logo).setVisibility(View.VISIBLE);
-            }
+
+            mHandler.postDelayed(sendData, 5000); // 5 seconds
         }
 
         private void loadLanguages() {

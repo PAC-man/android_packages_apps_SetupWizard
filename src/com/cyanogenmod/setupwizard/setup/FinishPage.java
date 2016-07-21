@@ -21,6 +21,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Animatable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -28,6 +30,7 @@ import android.os.Messenger;
 import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.cyanogenmod.setupwizard.R;
 import com.cyanogenmod.setupwizard.ui.SetupPageFragment;
@@ -123,13 +126,53 @@ public class FinishPage extends SetupPage {
     public static class FinishFragment extends SetupPageFragment {
 
         private boolean mShowingModGuide;
+        private final Handler mHandler = new Handler();
+
+        private View.OnClickListener mAnimatableClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try{
+                    animateLogo((ImageView)view);
+                } catch ( ClassCastException e){
+                    // do nothing and just log the class
+                    Log.e(TAG, "animation failed");
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        private void animateLogo(ImageView iv){
+            if (iv != null) {
+                Drawable dbl = iv.getDrawable();
+                if (dbl instanceof Animatable) {
+                    ((Animatable) dbl).start();
+                }
+            }
+        }
+
+        private Runnable sendData = new Runnable() {
+            public void run(){
+                try {
+                    final ImageView brandLogo = (ImageView) mRootView.findViewById(R.id.brand_logo);
+                    brandLogo.setOnClickListener(mAnimatableClickListener);
+                    animateLogo(brandLogo);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
 
         @Override
         protected void initializePage() {
             final Activity activity = getActivity();
+
+            mHandler.postDelayed(sendData, 1000); // 1 second
+
             if (!mShowingModGuide || (activity == null)) {
                 return;
             }
+
             mRootView.findViewById(R.id.explore_mod_guide)
                     .setOnClickListener(new View.OnClickListener() {
                 @Override
