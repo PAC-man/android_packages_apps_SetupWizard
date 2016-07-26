@@ -19,4 +19,10 @@
   <string name="setup_services_pac">Caratteristiche PAC-ROM</string>
   <string name="services_explanation_pac" product="tablet">Questi servizi vengono usati per estendere le funzionalità del tuo tablet.</string>
   <string name="services_explanation_pac" product="default">Questi servizi vengono usati per estendere le funzionalità del tuo telefono.</string>
+  <string name="services_help_improve_pac">Contribuire a migliorare <xliff:g id="name" example="PAC-ROM">%s</xliff:g></string>
+  <string name="services_metrics_label_pac"><xliff:g id="name" example="Help improve PAC-ROM">%1$s</xliff:g>
+        Inviando automaticamente dati diagnostici e di utilizzo di dati a PAC-ROM.
+        Queste informazioni non possono essere usate per identificartie aiuta
+        i team a lavorare su caratteristiche come durata della batteria, prestazioni delle app
+        e nuove <xliff:g id="name" example="PAC-ROM">%2$s</xliff:g> caratteristiche.</string>
 </resources>

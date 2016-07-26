@@ -19,4 +19,10 @@
   <string name="setup_services_pac">PAC-ROMの特徴</string>
   <string name="services_explanation_pac" product="tablet">これらのサービスは、タブレットの機能を拡張します。</string>
   <string name="services_explanation_pac" product="default">これらのサービスは、携帯電話の機能を拡張します。</string>
+  <string name="services_help_improve_pac">改善にご協力下さい <xliff:g id="name" example="PAC-ROM">%s</xliff:g></string>
+  <string name="services_metrics_label_pac"><xliff:g id="name" example="Help improve PAC-ROM">%1$s</xliff:g>
+        に診断と使用状況データを自動的に送信してPAC-ROMの改善を支援します。
+        この情報は個人を特定するために使用されることはなく、
+        電池持ち、アプリのパフォーマンス、
+        <xliff:g id="name" example="PAC-ROM">%2$s</xliff:g>の新機能などに取り組むときに活用されます。</string>
 </resources>
