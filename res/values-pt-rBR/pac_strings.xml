@@ -21,5 +21,8 @@
   <string name="services_explanation_pac" product="default">Estes serviços trabalham para estender os recursos do seu tablet.</string>
   <string name="services_help_improve_pac">Ajude a melhorar<xliff:g id="name" example="PAC-ROM">%s</xliff:g></string>
   <string name="services_metrics_label_pac"><xliff:g id="name" example="Help improve PAC-ROM">%1$s</xliff:g>
-        enviando automaticamente dados de diagnóstico para Nameless. Esta informação não será usada para o identificar mas sim ajudar a nossa equipe que trabalha em coisas como a vida da bateria, desempenho dos aplicativos e novos recursos de <xliff:g id="name" example="PAC-ROM">%2$s</xliff:g>.</string>
+        enviando automaticamente dados de diagnóstico para PAC-ROM. Esta informação não será usada
+        para o identificar mas sim ajudar a nossa equipe que trabalha em coisas como a vida da bateria,
+        desempenho dos aplicativos e novos recursos
+        de <xliff:g id="name" example="PAC-ROM">%2$s</xliff:g>.</string>
 </resources>

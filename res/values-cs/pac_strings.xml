@@ -19,4 +19,7 @@
   <string name="setup_services_pac">Funkce PAC-ROM</string>
   <string name="services_explanation_pac" product="tablet">Tyto služby mohou rozšířit funkce vašeho tabletu.</string>
   <string name="services_explanation_pac" product="default">Tyto služby mohou rozšířit funkce vašeho telefonu.</string>
+  <string name="services_help_improve_pac">Pomozte vylepšit <xliff:g id="name" example="PAC-ROM">%s</xliff:g></string>
+  <string name="services_metrics_label_pac"><xliff:g id="name" example="Help improve PAC-ROM">%1$s</xliff:g>
+        automatickým odesíláním diagnostických zpráv a dat o využívání PAC-ROM. Tyto informace nebudou použity k vaší identifikaci, ale pomohou týmům pracujícím na životnosti baterie, výkonu aplikací a nových funkcích <xliff:g id="name" example="PAC-ROM">%2$s</xliff:g>.</string>
 </resources>
